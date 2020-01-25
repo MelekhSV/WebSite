@@ -22,7 +22,7 @@ class Post(models.Model):
         return reverse('pizza_detail_url', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return '{}'. format(self.title)
+        return self.title
 
 
 
