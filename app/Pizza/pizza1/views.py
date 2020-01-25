@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 
 def Project_Function(request):
-    return render(request, 'Django/index.html')
+    return render(request, 'Pizza/index.html')
 
 def Result_Function(request):
     return render(request, 'Django/result.html')
