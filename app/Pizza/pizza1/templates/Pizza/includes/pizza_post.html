@@ -4,10 +4,16 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ pizz.title }}</h5>
-        <p class="card-text">{{ post.body|truncatewords:15 }}</p>
-        <a href="#" class="btn btn-light">Read</a>
+        <p class="card-text">{{ pizz.body|truncatewords:15 }}</p>
+        <a href="{{ pizz.get_absolute_url }}" class="btn btn-light">Read</a>
       </div>
         <div class="card-footer text-muted">
+            Tags:
+            {% for tag in pizz.tags.all %}
+                <a href="{{ tag.get_absolute_url }}">
+                {{ tag.title }}
+                </a>
+            {% endfor %}
 
         </div>
     </div>

@@ -1,0 +1,21 @@
+{% extends 'Pizza/base_index.html' %}
+
+
+
+{% block title %}
+    {{ pizza.title }} - {{ block.super }}
+
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="md-5">
+        {{ pizza.title }}
+    </h1>
+
+    <p>
+        {{ pizza.body }}
+    </p>
+
+
+{% endblock %}

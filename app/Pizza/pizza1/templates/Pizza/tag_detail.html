@@ -1,0 +1,18 @@
+{% extends 'Pizza/base_index.html' %}
+
+
+{% block title %}
+    {{ tag.title }} - {{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">
+        Pizza with "{{ tag.title|title }}" tag:
+    </h1>
+    {% for pizz in tag.pizzas.all %}
+
+        {% include 'Pizza/includes/pizza_post.html' %}
+
+    {% endfor %}
+{% endblock %}
