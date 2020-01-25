@@ -10,7 +10,7 @@
     <h1 class="mb-5">
         Pizza with "{{ tag.title|title }}" tag:
     </h1>
-    {% for pizz in tag.pizzas.all %}
+    {% for post in tag.pizzas.all %}
 
         {% include 'Pizza/includes/pizza_post.html' %}
 

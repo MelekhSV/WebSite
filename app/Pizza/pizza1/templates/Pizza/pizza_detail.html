@@ -3,18 +3,19 @@
 
 
 {% block title %}
-    {{ pizza.title }} - {{ block.super }}
+    {{ post.title }} - {{ block.super }}
 
 {% endblock %}
 
 
 {% block content %}
     <h1 class="md-5">
-        {{ pizza.title }}
+        {{ post.title }}
+
     </h1>
 
     <p>
-        {{ pizza.body }}
+        {{ post.body }}
     </p>
 
 
