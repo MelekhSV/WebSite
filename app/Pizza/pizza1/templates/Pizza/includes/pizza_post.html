@@ -4,6 +4,8 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ post.title }}</h5>
+        <img src="{{ post.image }}" class="card-img-top main-content">
+{#        <img src="{% static 'Pizza/image/Pizza.jpg' %}" class="card-img-top main-content">#}
         <p class="card-text">{{ post.body|truncatewords:15 }}</p>
         <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>
       </div>
