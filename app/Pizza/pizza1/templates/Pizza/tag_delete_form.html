@@ -1,0 +1,27 @@
+{% extends 'Pizza/base_index.html' %}
+
+{% block title %}
+    Tag Delete "{{ tad.title|title }}" - {{ block.super }}
+{% endblock %}
+
+
+
+{% block content %}
+    <form action="{% url 'tags_delete_url' slug=tag.slug %}" method="post">
+
+        {% csrf_token %}
+
+        <h3> Are you sure you wwnat to delete <b>"{{ tag.title|title }}" </b> tag?</h3>
+        <a href="{{ tag.get_absolute_url }} "> Cancel</a>
+
+
+
+{#url 'tag_detail_url' slug=tag.slug#}
+
+
+        <button type="submit" name="button" class="btn btn-danger">
+            Delete
+        </button>
+
+    </form>
+{% endblock %}
