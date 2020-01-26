@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href=" {% static 'css/styles.css' %}">
 
 
     <title>
@@ -57,7 +59,13 @@
                 </div>
             </div>
         </div>
+        <div class="admin-panel align-items-center" >
+            <a href="/admin" class="btn btn-outline-info">Admin</a>
+                {% block admin-panel %}
 
+                {% endblock %}
+
+        </div>
 
 
 
