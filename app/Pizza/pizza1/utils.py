@@ -11,7 +11,7 @@ class ObjectDetailMixin():
     def get(self,request,slug):
         odj = get_object_or_404(self.model,slug__iexact=slug)
 
-        return render(request, self.template, context={self.model.__name__.lower(): odj})
+        return render(request, self.template, context={self.model.__name__.lower(): odj, 'admin_object':odj, 'detail':True})
 
 
 

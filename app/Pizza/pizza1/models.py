@@ -43,6 +43,10 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
 
+    class Meta:
+        ordering = ['-data_pub']
+
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
@@ -57,3 +61,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return '{}'.format(self.title)
+
+    class Meta:
+        ordering = ['-title']

@@ -10,7 +10,7 @@
 
 {% block content %}
     <h1 class="md-5">Post:</h1>
-    {% for post in posts %}
+    {% for post in page_object.object_list %}
         {% include 'Pizza/includes/pizza_post.html' %}
     {% endfor %}
 

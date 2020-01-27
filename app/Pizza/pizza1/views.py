@@ -9,6 +9,9 @@ from .forms import TagForm, PostForm
 from django.shortcuts import redirect
 
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 class ObjectCreateMixin:
     model_form = None
@@ -86,8 +89,48 @@ class ObjectDeleteMixin:
 
 
 def pizza_list(request):
+    search_query = request.GET.get('search','')
+
+    if search_query:
+        pizza = Post.objects.filter(Q(title__icontains=search_query)| Q(body__icontains=search_query))
+    else:
+        pizza = Post.objects.all()
+
     pizza = Post.objects.all()
-    return render(request, 'Pizza/index.html', context={'posts':pizza})
+    paginator = Paginator(pizza,2)
+
+
+
+
+    page_number = request.GET.get('page', 1)
+    page = paginator.get_page(page_number)
+
+    is_paginated = page.has_other_pages()
+
+    if page.has_previous():
+        prev_url = '?page={}'.format(page.previous_page_number())
+    else:
+        prev_url = ''
+
+    if page.has_next():
+        next_url = '?page={}'.format(page.next_page_number())
+    else:
+        next_url = ''
+
+    context = {
+        'page_object': page,
+        'is_paginated': is_paginated,
+        'next_url': next_url,
+        'prev_url': prev_url
+    }
+
+
+
+
+    return render(request, 'Pizza/index.html', context= context)
+
+
+
 
 # def pizza_detail(request, slug):
 #     pizza = Post.objects.get(slug__iexact= slug)
@@ -112,9 +155,10 @@ class PostDetail(ObjectDetailMixin,View):
 
 
 
-class PostCreate(ObjectCreateMixin, View):
+class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = PostForm
     template = 'Pizza/pizza_create_form.html'
+    raise_exception = True
 
     # def get(self,request):
     #     form = PostForm()
@@ -128,10 +172,11 @@ class PostCreate(ObjectCreateMixin, View):
     #     return render(request, 'Pizza/pizza_create_form.html', context={'form': bound_from})
 
 
-class PostUpdate(ObjectUpdateMixin, View):
+class PostUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Post
     model_form = PostForm
     template = 'Pizza/pizza_update_form.html'
+    raise_exception = True
 
 
 
@@ -165,9 +210,10 @@ class TagDetail(ObjectDetailMixin,View):
 #     # tags = Tag.objects.all()
 #     return render(request, 'Pizza/tag_detail.html', context={'tag':tag})
 
-class TagCreate(ObjectCreateMixin,View):
+class TagCreate(LoginRequiredMixin, ObjectCreateMixin,View):
     model_form = TagForm
     template = 'Pizza/tag_create.html'
+    raise_exception = True
 
 
 
@@ -183,10 +229,11 @@ class TagCreate(ObjectCreateMixin,View):
      #         return redirect(new_tag)
      #     return render(request, 'Pizza/tags_list.html', context={'form':bound_form} )
 
-class TagUpdate(ObjectUpdateMixin, View):
+class TagUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Tag
     model_form = TagForm
     template = 'Pizza/tag_update_form.html'
+    raise_exception = True
 
     # def get(self, request, slug):
     #     tag = Tag.objects.get(slug__iexact=slug)
@@ -205,7 +252,8 @@ class TagUpdate(ObjectUpdateMixin, View):
     #     return render(request, 'Pizza/tag_update_form', context={'form':bound_form, 'tag':tag})
 
 
-class TagDelete(View):
+class TagDelete(LoginRequiredMixin,View):
+    raise_exception = True
 
     # model = Tag
     # template = 'Pizza/tag_delete_form.html'
@@ -221,7 +269,8 @@ class TagDelete(View):
         return render(reverse('tags_list_url'))
 
 
-class PostDelete(View):
+class PostDelete(LoginRequiredMixin,View):
+    raise_exception = True
 
     # model = Tag
     # template = 'Pizza/tag_delete_form.html'
