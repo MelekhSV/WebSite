@@ -3,6 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('', pizza_list, name='pizza_list_url'),
+    path('count/', pizza_count, name='pizza_count_url'),
     path('pizza/create/', PostCreate.as_view(), name='pizza_create_url'),
     path('pizza/<str:slug>/', PostDetail.as_view(), name='pizza_detail_url'),
     path('pizza/<str:slug>/update', PostUpdate.as_view(), name='pizza_update_url'),

@@ -9,6 +9,22 @@
         <p class="card-text">{{ post.body|truncatewords:15 }}</p>
         <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>
       </div>
+
+
+
+
+      <form id="form_buying product" class="form-inline">
+             <input class="form-control" type="number" name="number" id="numder">
+
+      </form>
+      <button type="submit" id="submit_btn" class="btn btn-success btn-buy" data-name="{{ post.title }}"> Купить </button>
+
+{#      <form class="form-inline my-2 my-lg-0" action="{%  url 'pizza_list_url' %}">#}
+{#             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search1">#}
+{#             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#      </form>#}
+
+
         <div class="card-footer text-muted">
             Tags:
             {% for tag in post.tags.all %}

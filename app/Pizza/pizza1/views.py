@@ -86,10 +86,22 @@ class ObjectDeleteMixin:
 
 
 
+def pizza_count(request):
+    pizza = Post.objects.all()
+    search_query = request.GET.get('search1','')
+    return render(request, 'Pizza/Count.html', context={'posts': pizza, 'search1': search_query})
+
+
+
 
 
 def pizza_list(request):
     search_query = request.GET.get('search','')
+    # search_count = request.POST.post('search1', '')
+    #
+    # if search_count.is_valid():
+    #     pass
+    #
 
     if search_query:
         pizza = Post.objects.filter(Q(title__icontains=search_query)| Q(body__icontains=search_query))
