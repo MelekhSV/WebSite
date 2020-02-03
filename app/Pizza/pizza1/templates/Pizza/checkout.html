@@ -1,0 +1,18 @@
+{% extends 'Pizza/base_index.html' %}
+
+{% block title %}
+    Post list
+
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="md-5">Post:</h1>
+    {% for product_in_basket in products_in_basket %}
+        <li>
+            {{ products_in_basket.products_name }}
+        </li>
+    {% endfor %}
+
+{% endblock %}
+

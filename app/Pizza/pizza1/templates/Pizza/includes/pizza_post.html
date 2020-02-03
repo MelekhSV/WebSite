@@ -12,12 +12,15 @@
 
 
 
+      <div>
+          <form id="form_buying_product" class="form-inline" action="{% url 'pizza_count_url' %}"> {% csrf_token %}
+             <input class="form-control" type="number" name="number" id="number">
+             <button type="submit" id="submit_btn" class="btn btn-success btn-buy" data-name="{{ post.title }}"> Купить </button>
+          </form>
 
-      <form id="form_buying product" class="form-inline">
-             <input class="form-control" type="number" name="number" id="numder">
 
-      </form>
-      <button type="submit" id="submit_btn" class="btn btn-success btn-buy" data-name="{{ post.title }}"> Купить </button>
+      </div>
+
 
 {#      <form class="form-inline my-2 my-lg-0" action="{%  url 'pizza_list_url' %}">#}
 {#             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search1">#}
