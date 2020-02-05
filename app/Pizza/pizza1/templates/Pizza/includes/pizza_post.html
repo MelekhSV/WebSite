@@ -7,6 +7,7 @@
         <img src="{{ post.image }}" class="card-img-top main-content">
 {#        <img src="{% static 'Pizza/image/Pizza.jpg' %}" class="card-img-top main-content">#}
         <p class="card-text">{{ post.body|truncatewords:15 }}</p>
+          <p class="card-text">{{ post.total_price}}</p>
         <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>
       </div>
 
@@ -15,7 +16,7 @@
       <div>
           <form id="form_buying_product" class="form-inline" action="{% url 'pizza_count_url' %}"> {% csrf_token %}
              <input class="form-control" type="number" name="number" id="number">
-             <button type="submit" id="submit_btn" class="btn btn-success btn-buy" data-name="{{ post.title }}"> Купить </button>
+             <button type="submit" id="submit_btn" class="btn btn-success btn-buy" data-name="{{ post.title }}" data-price="{{ post.total_price }}"> Купить </button>
           </form>
 
 

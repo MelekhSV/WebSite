@@ -3,10 +3,12 @@ $(document).ready(function () {
     console.log(form);
 
 
-    function basketUpdating(products_name, nmb, is_delete){
+    function basketUpdating(products_name, nmb, products_price, is_delete){
         var data = {};
         data.products_name = products_name;
         data.nmb = nmb;
+        data.products_price = products_price;
+
             var csrf_token = $('#form_buying_product [name="csrfmiddlewaretoken"]').val();
             data["csrfmiddlewaretoken"] = csrf_token;
 
@@ -32,7 +34,7 @@ $(document).ready(function () {
                         console.log(data.products);
                         $('.basket-items ul').html("");
                         $.each[data.products, function (k, v) {
-                            $('.basket-items ul').append('<li> '+v.products_name+','+v.nmb+'      <a class ="delete-item" href="" data-products_name="'+v.products_name+'"> x </a> </li>');
+                            $('.basket-items ul').append('<li> '+v.products_name+','+v.nmb+','+v.products_price+'      <a class ="delete-item" href="" data-products_name="'+v.products_name+'"> x </a> </li>');
                         }];
                     }
 
@@ -70,11 +72,13 @@ $(document).ready(function () {
         console.log(nmb);
         var submit_btn=$('#submit_btn');
         var products_name = submit_btn.data("name");
+        var products_price = submit_btn.data("price");
+
 
         console.log(products_name);
 
 
-        basketUpdating(products_name, nmb, is_delete=false)
+        basketUpdating(products_name, nmb, products_price,is_delete=false)
 
 
 
@@ -109,6 +113,31 @@ $(document).ready(function () {
         basketUpdating(products_name, nmb, is_delete = true)
 
     })
+    
+    
+    
+    function calculatingBasketAmount(){
+        var total_order_amount = 0
+        $('.total-product-in-basket-amount').each(function () {
+            total_product_in_basket_amount += parseFloat($(this).text();
 
+        })
+        console.log(total_order_amount);
+        $('#total_order_amount').text(total_order_amount);
+    };
+
+    $(document).on('change',".product-in-basket-nmb", function(){
+        var current_nmb = $(this).val()
+        var curent_tr = $(this).closest('tr');
+
+        var current_price = parseFloat(curent_tr.find('.prosuct-price').text());
+        var total_amount = current_nmb*current_price;
+        current_tr.find('.total-product-in-basket-amount').text(total_amount);
+        calculatingBasketAmount();
+    })
+
+
+
+    calculatingBasketAmount();
 
 });

@@ -43,18 +43,23 @@ class TagForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'body', 'image', 'tags']
+        # fields = ['session_key', 'title', 'products_name', 'nmb']
+
+        exclude = [""]
+    # class Meta:
+    #     model = Post
+    #     fields = ['title', 'slug', 'body', 'image', 'tags']
+    #
+    #
+    #     wighets = {
+    #         'title': forms.TextInput(attrs={'class': 'form-control'}),
+    #         'slug': forms.TextInput(attrs={'class': 'form-control'}),
+    #         'body': forms.Textarea(attrs={'class': 'form-control'}),
+    #         'image': forms.FileInput(attrs={'class': 'form-control-file'}),
+    #         'tags': forms.SelectMultiple(attrs={'class':'form-control'})
 
 
-        wighets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-            'image': forms.FileInput(attrs={'class': 'form-control-file'}),
-            'tags': forms.SelectMultiple(attrs={'class':'form-control'})
-
-
-        }
+        # }
 
         def clean_slug(self):
             new_slug = self.cleaned_data['slug'].lower()

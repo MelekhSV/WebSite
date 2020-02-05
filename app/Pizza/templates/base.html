@@ -59,7 +59,7 @@
                       <div class="basket-items hidden">
                           <ul class="" >
                               {% for product_in_basket in products_in_basket %}
-                              <li>{{ product_in_basket.products_name }} + {{ product_in_basket.nmb }}  <a class ="delete-item" href="" data-products_name="{{ product_in_basket.products_name }}"> x </a>
+                              <li>{{ product_in_basket.products_name }} + {{ product_in_basket.nmb }} + {{ product_in_basket.products_price }} <a class ="delete-item" href="" data-products_name="{{ product_in_basket.products_name }}"> x </a>
                               {% endfor %}
                           </ul>
                       </div>

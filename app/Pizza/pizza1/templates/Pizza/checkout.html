@@ -8,11 +8,70 @@
 
 {% block content %}
     <h1 class="md-5">Post:</h1>
-    {% for product_in_basket in products_in_basket %}
-        <li>
-            {{ products_in_basket.products_name }}
-        </li>
-    {% endfor %}
+
+    <form>
+
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th> Название товара </th>
+                    <th> Количество </th>
+                    <th> Цена </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for product_in_basket in products_in_basket %}
+                    <tr>
+                        <td>
+                            {{ product_in_basket.products_name }}
+                        </td>
+                        <td>
+                            <input value="{{ product_in_basket.nmb }}" type="number" class="product-in-basket-nmb">
+
+
+                        </td>
+                        <td>
+
+                            <span class="prosuct-price">
+                                {{ product_in_basket.products_price}}
+                            </span>
+
+
+
+                        </td>
+
+
+
+
+                        <td>
+
+                            <span class="total-product-in-basket-amount">
+                                {{ product_in_basket.total_products_price }}
+                            </span>
+
+
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <div class="text-right">
+        <b>Сумма заказа: </b> <span id="total_order_amount">54</span>
+    </div>
+    <br>
+
+    <div class="col-lg-13">
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Заказать</button>
+        </div>
+    </div>
+
+    </form>
+
 
 {% endblock %}
+
 

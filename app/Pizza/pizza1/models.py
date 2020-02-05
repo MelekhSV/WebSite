@@ -22,7 +22,7 @@ class Post(models.Model):
     image = models.ImageField(blank=True,default=None)
     tags = models.ManyToManyField('Tag',blank=True, related_name='pizzas')
     data_pub = models.DateTimeField(auto_now_add=True)
-
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def get_absolute_url(self):
         return reverse('pizza_detail_url', kwargs={'slug': self.slug})
@@ -74,7 +74,9 @@ class ProductInBasket(models.Model):
     # slug = models.SlugField(max_length=150,blank=True, unique=True)
     # body = models.TextField(blank=True, db_index=True)
     nmb = models.IntegerField(default=1)
+    products_price = models.DecimalField(max_digits=10, decimal_places=2, default=1)
     is_active = models.BooleanField(default=True)
+
     # image = models.ImageField(blank=True,default=None)
     # tags = models.ManyToManyField('Tag',blank=True, related_name='pizzas')
     # data_pub = models.DateTimeField(auto_now_add=True)
@@ -87,8 +89,8 @@ class ProductInBasket(models.Model):
     #     return reverse('pizza_update_url', kwargs={'slug': self.slug})
 
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.products_name
 
     #
     # генерация слага по title

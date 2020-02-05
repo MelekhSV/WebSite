@@ -315,4 +315,6 @@ def basket_adding(request):
 def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+    print(products_in_basket)
+
     return render(request, 'Pizza/checkout.html', context={'products_in_basket':products_in_basket})
