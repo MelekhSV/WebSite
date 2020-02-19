@@ -4,6 +4,8 @@ from .views import *
 urlpatterns = [
     path('', pizza_list, name='pizza_list_url'),
     path('count/', basket_adding, name='pizza_count_url'),
+    path('mail/', basket_mail, name='pizza_mail_url'),
+    path('mail1/', basket1_mail, name='pizza_mail1_url'),
     path('basket/', checkout, name='pizza_checkout_url'),
     path('pizza/create/', PostCreate.as_view(), name='pizza_create_url'),
     path('pizza/<str:slug>/', PostDetail.as_view(), name='pizza_detail_url'),
@@ -15,5 +17,6 @@ urlpatterns = [
     path('tag/<str:slug>/delete', TagDelete.as_view() , name='tags_delete_url'),
     path('pizza/<str:slug>/delete', PostDelete.as_view() , name='post_delete_url')
 ]
+
 
 

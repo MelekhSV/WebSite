@@ -74,8 +74,11 @@ class ProductInBasket(models.Model):
     # slug = models.SlugField(max_length=150,blank=True, unique=True)
     # body = models.TextField(blank=True, db_index=True)
     nmb = models.IntegerField(default=1)
-    products_price = models.DecimalField(max_digits=10, decimal_places=2, default=1)
+    products_price = models.DecimalField(max_digits=10, decimal_places=2, default=12)
     is_active = models.BooleanField(default=True)
+    name = models.CharField(max_length=128, blank=True, null=True, default=None)
+    lastname = models.CharField(max_length=128, blank=True, null=True, default=None)
+    mail = models.CharField(max_length=128, blank=True, null=True, default=None)
 
     # image = models.ImageField(blank=True,default=None)
     # tags = models.ManyToManyField('Tag',blank=True, related_name='pizzas')

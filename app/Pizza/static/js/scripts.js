@@ -2,12 +2,44 @@ $(document).ready(function () {
     var form = $('#form_buying_product');
     console.log(form);
 
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
-    function basketUpdating(products_name, nmb, products_price, is_delete){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function basketUpdating(products_name, nmb, is_delete){
         var data = {};
         data.products_name = products_name;
         data.nmb = nmb;
-        data.products_price = products_price;
+        // data.products_price = products_price;
 
             var csrf_token = $('#form_buying_product [name="csrfmiddlewaretoken"]').val();
             data["csrfmiddlewaretoken"] = csrf_token;
@@ -78,7 +110,7 @@ $(document).ready(function () {
         console.log(products_name);
 
 
-        basketUpdating(products_name, nmb, products_price,is_delete=false)
+        basketUpdating(products_name, nmb,is_delete=false)
 
 
 
@@ -110,7 +142,7 @@ $(document).ready(function () {
         e.preventDefault();
         products_name = $(this).data("products_name")
         nmb = 0;
-        basketUpdating(products_name, nmb, is_delete = true)
+        basketUpdating(products_name, nmb,is_delete = true)
 
     })
     
@@ -119,18 +151,28 @@ $(document).ready(function () {
     function calculatingBasketAmount(){
         var total_order_amount = 0
         $('.total-product-in-basket-amount').each(function () {
-            total_product_in_basket_amount += parseFloat($(this).text();
+            console.log($(this).text());
+            // total_product_in_basket_amount += parseFloat($(this).text());
 
-        })
+        });
         console.log(total_order_amount);
+        // var name = $('.name-in-basket-nmb').val();
+        // console.log(name);
+        // $('.name-in-basket-nmb').each(function () {
+        // //     console.log($(this).text());
+        // });
         $('#total_order_amount').text(total_order_amount);
     };
 
     $(document).on('change',".product-in-basket-nmb", function(){
-        var current_nmb = $(this).val()
+        var current_nmb = $(this).val();
         var curent_tr = $(this).closest('tr');
-
-        var current_price = parseFloat(curent_tr.find('.prosuct-price').text());
+        // $('.name-in-basket-nmb').each(function () {
+        //     console.log($(this).text());
+        // });
+        // var nmb = $('.name-in-basket-nmb').val();
+        // console.log(nmb);
+        var current_price = parseFloat(curent_tr.find('.product-price').text());
         var total_amount = current_nmb*current_price;
         current_tr.find('.total-product-in-basket-amount').text(total_amount);
         calculatingBasketAmount();
@@ -140,4 +182,84 @@ $(document).ready(function () {
 
     calculatingBasketAmount();
 
+
+// $(document).ready(function () {
+//     var form = $('#orders_buying_product');
+//     console.log(form);
+
+    $(document).on('click', '.submit_btn_mail', function (e) {
+        e.preventDefault();
+        var form = $('#orders_buying_product');
+        var data1 = {};
+
+        var name = $('.name-in-basket-nmb').val();
+        console.log(name);
+        data1.name = name;
+
+
+            // var csrf_token = $('#orders_buying_product [name="csrfmiddlewaretoken"]').val();
+            var csrftoken = getCookie('csrftoken');
+            data1["csrftoken"] = csrftoken;
+
+            var url = form.attr("action");
+            console.log(data1);
+
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data1,
+                cache: true,
+                success: function (data) {
+                    console.log('OK');
+                    console.log(data.name);
+                },
+                error: function  () {
+                     console.log('Error11111111111111');
+                }
+
+
+
+            });
+
+
+    });
+
+
+
+
+
+    $(document).on('click', '.submit1-btn-mail', function (e) {
+            e.preventDefault();
+            var form = $('#orders1_buying_product');
+            var data = {};
+            var name = $('.name1-in-basket-nmb').val();
+            var mail = $('.mail1-in-basket-nmb').val();
+            var adress = $('.adress1-in-basket-nmb').val();
+            console.log(name);
+            console.log(mail);
+            console.log(adress);
+            data.name = name;
+            data.mail = mail;
+            data.adress = adress;
+                // var csrf_token = $('#orders_buying_product [name="csrfmiddlewaretoken"]').val();
+                var token = getCookie('csrftoken');
+                // data["csrftoken"] = csrftoken;
+                var url = form.attr("action");
+            console.log(data);
+                $.ajax({
+                    url: url,
+                    headers: { "X-CSRFToken": token },
+                    type: 'POST',
+                    data: data,
+                    cache: true,
+                    success: function (data) {
+                        console.log('OK');
+                        // console.log(data.name);
+                    },
+                    error: function  () {
+                         console.log('Error1223');
+                    }
+                })
+        })
 });

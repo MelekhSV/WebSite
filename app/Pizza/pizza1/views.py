@@ -5,7 +5,7 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from .utils import ObjectDetailMixin
 from .forms import TagForm, PostForm
-
+from django.conf import settings
 from django.shortcuts import redirect
 
 from django.urls import reverse
@@ -14,6 +14,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
 
+from django.core.mail import send_mail
 
 class ObjectCreateMixin:
     model_form = None
@@ -316,5 +317,52 @@ def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
     print(products_in_basket)
+    print(request.POST)
+
+    # data = request.POST
+    # products_name = data.get('nmb')
+    # print(products_name)
+    # print('esfs11111111d')
+    #
+    # user_name = data.get('name')
+    # print(user_name)
+    # send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, ['melex.1998@mail.ru'])
+
 
     return render(request, 'Pizza/checkout.html', context={'products_in_basket':products_in_basket})
+
+
+    return_dict = dict()
+    session_key = request.session.session_key
+    print(request.POST)
+
+
+
+    return JsonResponse(return_dict)
+
+
+def basket_mail(request):
+    session_key = request.session.session_key
+    data = request.POST
+    print(data)
+    username=data.get('name')
+    mail = data.get('mail')
+    print(mail)
+    adress = data.get('adress')
+    text1 = 'Добырый день {} Ваш заказ оформлен. в течении часа будет доставлен по адрессу {} приятно апетита'.format(username, adress)
+
+    send_mail('пиццы', text1, settings.EMAIL_HOST_USER, [mail])
+    # send_mail('пиццы', username, settings.EMAIL_HOST_USER, ['melex.1998@mail.com'])
+    return render(request, 'Pizza/mail.html')
+
+
+
+
+
+def basket1_mail(request):
+    return_dict = dict()
+    session_key = request.session.session_key
+    print(request.POST)
+
+
+    return JsonResponse(return_dict)

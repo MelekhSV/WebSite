@@ -17,6 +17,7 @@
                     <th> Название товара </th>
                     <th> Количество </th>
                     <th> Цена </th>
+                    <th> общая цена </th>
 
                 </tr>
             </thead>
@@ -33,7 +34,7 @@
                         </td>
                         <td>
 
-                            <span class="prosuct-price">
+                            <span class="product-price">
                                 {{ product_in_basket.products_price}}
                             </span>
 
@@ -47,7 +48,7 @@
                         <td>
 
                             <span class="total-product-in-basket-amount">
-                                {{ product_in_basket.total_products_price }}
+                                {{ product_in_basket.products_price }}
                             </span>
 
 
@@ -59,17 +60,28 @@
             </tbody>
         </table>
     <div class="text-right">
-        <b>Сумма заказа: </b> <span id="total_order_amount">54</span>
+        <b>Сумма заказа: </b> <span id="total_order_amount">30</span>
     </div>
     <br>
-
-    <div class="col-lg-13">
-        <div class="text-right">
-            <button type="submit" class="btn btn-primary">Заказать</button>
-        </div>
-    </div>
-
+    <form id="orders_buying_product" class="form-inline" method="post" action="{% url 'pizza_mail_url'  %}"> {% csrf_token %}
+{#        <li>Введите имя  <input  class="name-in-basket-nmb"></li>#}
+{##}
+{#        <li>Введите адрес электронной почты <input class="name-in-basket-nmb"></li>#}
+{#        <li>Введите адрес доставки <input class="mail-in-basket-nmb"></li>#}
+{#        <button type="submit" class="submit_btn_mail" > Купить </button>#}
+        <a href="{% url 'pizza_mail_url' %} " class="btn btn-light">Оформить заказ</a>
     </form>
+
+
+
+
+{#    <div class="col-lg-13">#}
+{#        <div class="text-right">#}
+{#            <button type="submit" class="btn btn-primary">Заказать</button>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    </form>#}
 
 
 {% endblock %}

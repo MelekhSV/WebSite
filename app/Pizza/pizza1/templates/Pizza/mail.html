@@ -1,0 +1,19 @@
+{% extends 'Pizza/base_index.html' %}
+
+{% block content %}
+    <form id="orders1_buying_product" class="form-inline" method="post" action="{% url 'pizza_mail_url'  %}"> {% csrf_token %}
+        <li>Введите имя  <input  class="name1-in-basket-nmb"></li>
+
+        <li>Введите адрес электронной почты <input class="mail1-in-basket-nmb"></li>
+        <li>Введите адрес доставки<input class="adress1-in-basket-nmb"></li>
+        <button type="submit" class="submit1-btn-mail" > Заказ </button>
+    </form>
+
+
+
+
+
+
+
+{% endblock %}
+
